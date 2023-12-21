@@ -1,5 +1,5 @@
 import Logo from "../image/icons8-google-48.png"
-import { auth } from "../../firebase.js";
+import { auth } from "../../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Welcome = () => {
