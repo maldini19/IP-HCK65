@@ -2,8 +2,8 @@ import { useState } from "react";
 import { auth, db, storage } from "../../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import EmojiPicker from "emoji-picker-react";
 import { BsEmojiLaughingFill } from 'react-icons/bs';
+import EmojiPicker from "emoji-picker-react";
 import PropTypes from "prop-types";
 
 function SendMessage({ scroll }) {
@@ -78,7 +78,7 @@ function SendMessage({ scroll }) {
             name="imageInput"
             type="file"
             onChange={onImageChange}
-            style={{ display: 'none' }} // hide the actual input element
+            style={{ display: 'none' }}
           />
         </label>
         <button type="submit">🕊️</button>
