@@ -11,10 +11,12 @@ const Welcome = () => {
   return (
     <>
       <h1 className="header">DisKrod💬</h1>
+      <div className="sign-in-container">
       <button className="sign-in" onClick={googleSignIn}>
         <img src={Logo} alt="Google Sign-In" />
         Sign in with Google
       </button>
+      </div>
     </>
   )
 }

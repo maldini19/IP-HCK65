@@ -1,12 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { auth } from "../../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 function NavBar() {
   const [user] = useAuthState(auth);
-
+  const navigate = useNavigate();
 
   const signOut = () => {
-    auth.signOut();
+    auth.signOut().then(() => {
+      navigate('/');
+    });
   };
 
   return (
@@ -22,4 +25,5 @@ function NavBar() {
     </nav>
   );
 }
+
 export default NavBar;

@@ -220,7 +220,15 @@ span {
 
 .sign-in {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: #005b96
+  background-color: #005b96;
+}
+
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
