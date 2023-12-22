@@ -20,11 +20,10 @@ function Message({ message }) {
     ref.current?.scrollIntoView({behavior: "smooth"})
   }, [message])
 
-  const handleDeleteMessage = async () => {
+  const deleteMessage = async () => {
     if (user.uid === message.uid) {
       const messageRef = doc(db, "messages", message.id);
       await deleteDoc(messageRef);
-      dispatch(deleteMessage(message.id));
     }
   };
 
@@ -65,7 +64,7 @@ function Message({ message }) {
         {user.uid === message.uid && (
           <div className="button-action">
           <button className="button-delete">
-            <RiDeleteBin5Fill color="black" onClick={handleDeleteMessage} style={{ fontSize: '24px' }}/>
+            <RiDeleteBin5Fill color="black" onClick={deleteMessage} style={{ fontSize: '24px' }}/>
           </button>
           <button className="button-edit">
             <CiEdit color="black" onClick={() => setIsEditing(true)} style={{ fontSize: '24px' }}/>
