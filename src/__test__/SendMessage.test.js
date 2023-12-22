@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, test, expect } from '@testing-library/react';
 import SendMessage from '../components/SendMessage';
 
+
 test('renders SendMessage component', () => {
   render(<SendMessage />);
   
