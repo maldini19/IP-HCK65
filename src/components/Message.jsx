@@ -2,7 +2,8 @@ import { auth, db } from "../../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useState, useRef, useEffect } from "react";
-
+import { useDispatch } from 'react-redux';
+import { deleteMessage } from '../redux/action.js';
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 
@@ -12,16 +13,18 @@ function Message({ message }) {
   const [user] = useAuthState(auth);
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message.text);
+  const dispatch = useDispatch();
   const ref = useRef();
 
   useEffect(() => {
     ref.current?.scrollIntoView({behavior: "smooth"})
   }, [message])
 
-  const deleteMessage = async () => {
+  const handleDeleteMessage = async () => {
     if (user.uid === message.uid) {
       const messageRef = doc(db, "messages", message.id);
       await deleteDoc(messageRef);
+      dispatch(deleteMessage(message.id));
     }
   };
 
@@ -62,7 +65,7 @@ function Message({ message }) {
         {user.uid === message.uid && (
           <div className="button-action">
           <button className="button-delete">
-            <RiDeleteBin5Fill color="black" onClick={deleteMessage} style={{ fontSize: '24px' }}/>
+            <RiDeleteBin5Fill color="black" onClick={handleDeleteMessage} style={{ fontSize: '24px' }}/>
           </button>
           <button className="button-edit">
             <CiEdit color="black" onClick={() => setIsEditing(true)} style={{ fontSize: '24px' }}/>

@@ -3,13 +3,17 @@ import { auth, db, storage } from "../../firebase.js";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { BsEmojiLaughingFill } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { addMessage } from '../redux/action.js';
 import EmojiPicker from "emoji-picker-react";
 import PropTypes from "prop-types";
+
 
 function SendMessage({ scroll }) {
   const [message, setMessage] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
 
   const onEmojiClick = (event) => {
     setMessage(message + event.emoji);
@@ -36,14 +40,19 @@ function SendMessage({ scroll }) {
       });
     }
 
-    await addDoc(collection(db, "messages"), {
+    const newMessage = {
       text: message,
       name: displayName,
       avatar: photoURL,
       createdAt: serverTimestamp(),
       uid,
       image: imageUrl,
-    });
+    };
+
+
+    await addDoc(collection(db, "messages"), newMessage);
+    dispatch(addMessage(newMessage));
+
     setMessage("");
     setImage(null);
     setShowEmojiPicker(false);

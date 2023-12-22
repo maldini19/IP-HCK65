@@ -7,19 +7,14 @@ export const clearUser = () => ({
   type: "CLEAR_USER",
 });
 
-export const setMessage = (message) => ({
-  type: "SET_MESSAGE",
-  payload: message,
-});
-
-export const setImage = (image) => ({
-  type: "SET_IMAGE",
-  payload: image,
-});
-
-export const setEmoji = (emoji) => ({
-    type: 'SET_EMOJI',
-    payload: emoji,
+export const addMessage = message => ({
+    type: 'ADD_MESSAGE',
+    payload: message,
+  });
+  
+  export const deleteMessage = id => ({
+    type: 'DELETE_MESSAGE',
+    payload: id,
   });
 
 export const clearMessageData = () => ({
